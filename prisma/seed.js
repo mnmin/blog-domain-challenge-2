@@ -1,47 +1,43 @@
 const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient()
 
-async function main() {
-  const alice = await prisma.user.upsert({
-    where: { email: 'alice@prisma.io' },
-    update: {},
-    create: {
-      email: 'alice@prisma.io',
-      name: 'Alice',
-      posts: {
-        create: {
-          title: 'Check out Prisma with Next.js',
-          content: 'https://www.prisma.io/nextjs',
-          published: true,
-        },
-      },
-    },
-  })
 
-  const bob = await prisma.user.upsert({
-    where: { email: 'bob@prisma.io' },
-    update: {},
-    create: {
-      email: 'bob@prisma.io',
-      name: 'Bob',
-      posts: {
-        create: [
-          {
-            title: 'Follow Prisma on Twitter',
-            content: 'https://twitter.com/prisma',
-            published: true,
-          },
-          {
-            title: 'Follow Nexus on Twitter',
-            content: 'https://twitter.com/nexusgql',
-            published: true,
-          },
-        ],
-      },
+async function main() {
+  
+  const createUser = await prisma.user.create({
+    data: {
+      username: "Peter",
+      email: "peter@gmail.com",
+      password: "peter123",
+        profile: {
+          create : {
+            firstName: "peter",
+            lastName: "power",
+            age: 33,
+            pictureUrl: "https://www.vox.com/culture/22846934/the-matrix-trilogy-what-happened-refresher"
+        }
+      }
     },
-  })
-  console.log({ alice, bob })
+    // include: {
+    //   profile: true
+    // }   
+  });
+
+  const createPost = await prisma.post.create({
+    data: {
+        title: "My first post",
+        content: "This is my first Post",
+        imageUrl: "https://kentattractions.co.uk/wp-content/uploads/2016/03/banner-41.jpg",
+        publishedAt: new Date(),
+        userId: 1,
+    }
+})
+
 }
+
+
+
+  
 
 main()
   .then(async () => {

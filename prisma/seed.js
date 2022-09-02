@@ -42,6 +42,19 @@ async function main() {
     }   
   });
 
+  const createFirstPostUser1 = await prisma.post.create({
+    data: {
+        title: "My first post",
+        content: "This is my first Post",
+        imageUrl: "post image sample",
+        publishedAt: new Date(),
+        authorId: 1,
+    },
+    // include: {
+    //   categories: true
+    // }
+})
+
 }
 
   

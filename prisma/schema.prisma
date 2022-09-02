@@ -36,28 +36,28 @@ model User {
 }
 
 model Post {
-  id            Int             @id @default(autoincrement())
-  title         String          @unique
-  content       String
-  imageUrl      String
-  publishedAt   DateTime?
-  user          User            @relation(fields: [userId], references: [id])
-  userId        Int
-  Category      Category[]
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @updatedAt
-  comment       Comment[]
-  PostCategoies PostCategoies[]
+  id             Int              @id @default(autoincrement())
+  title          String           @unique
+  content        String
+  imageUrl       String
+  publishedAt    DateTime?
+  user           User             @relation(fields: [userId], references: [id])
+  userId         Int
+  Category       Category[]
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  comment        Comment[]
+  PostCategories PostCategories[]
 }
 
 model Category {
-  id            Int             @id @default(autoincrement())
-  name          String          @unique
-  posts         Post            @relation(fields: [postId], references: [id])
-  postId        Int
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @updatedAt
-  PostCategoies PostCategoies[]
+  id             Int              @id @default(autoincrement())
+  name           String           @unique
+  posts          Post             @relation(fields: [postId], references: [id])
+  postId         Int
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  PostCategories PostCategories[]
 }
 
 model Comment {
@@ -67,14 +67,14 @@ model Comment {
   userId    Int
   parentId  Int?
   parent    Comment?  @relation("ParentComment", fields: [parentId], references: [id])
-  child     Comment[] @relation("ParentComment")
+  replies   Comment[] @relation("ParentComment")
   post      Post?     @relation(fields: [postId], references: [id])
   postId    Int?
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
 }
 
-model PostCategoies {
+model PostCategories {
   post       Post     @relation(fields: [postId], references: [id])
   postId     Int
   category   Category @relation(fields: [categoryId], references: [id])

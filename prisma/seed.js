@@ -6,7 +6,7 @@ async function main() {
   
   const createFirstUser = await prisma.user.create({
     data: {
-      username: "AliceWonderland",
+      userName: "AliceWonderland",
       email: "alice@gmail.com",
       password: "alice123",
         profile: {
@@ -25,7 +25,7 @@ async function main() {
 
   const createSecondUser = await prisma.user.create({
     data: {
-      username: "Peter",
+      userName: "Peter",
       email: "peter@gmail.com",
       password: "peter123",
         profile: {
@@ -42,23 +42,7 @@ async function main() {
     }   
   });
 
-//   const createPost = await prisma.post.create({
-//     data: {
-//         title: "My first post",
-//         content: "This is my first Post",
-//         imageUrl: "https://kentattractions.co.uk/wp-content/uploads/2016/03/banner-41.jpg",
-//         publishedAt: new Date(),
-//         userId: 1,
-//     }
-// })
-
-// const createCategory = await prisma.category.create({
-  
-// })
-
 }
-
-
 
   
 

@@ -55,6 +55,19 @@ async function main() {
     // }
 })
 
+const createSecondPostUser2 = await prisma.post.create({
+  data: {
+      title: "My second post",
+      content: "This is my second Post",
+      imageUrl: "second post image sample",
+      publishedAt: new Date(),
+      authorId: 2,
+  },
+  // include: {
+  //   categories: true
+  // }
+})
+
 }
 
   
